@@ -4,6 +4,14 @@ import com.codeclan.example.WhiskyTracker.models.Whisky;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface WhiskyRepository extends JpaRepository<Whisky, Long>, WhiskyRepositoryCustom {
+
+    List<Whisky> findByYearEquals(int year);
+
+    List<Whisky> readByAgeAndDistilleryName(int age, String distillery);
+
+    List<Whisky> readByDistilleryName(String distillery);
 }
