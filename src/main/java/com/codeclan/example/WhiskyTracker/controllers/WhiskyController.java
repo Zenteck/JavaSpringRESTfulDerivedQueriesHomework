@@ -42,11 +42,23 @@ public class WhiskyController {
         return new ResponseEntity<>(whisky, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/whisky/distillery")
-    public ResponseEntity<List<Whisky>> findWhiskyWithDistilleryNamed(@RequestParam(name="named") String distillery){
-        List<Whisky> whiskies = whiskyRepository.readByDistilleryName(distillery);
-        return new ResponseEntity<>(whiskies, HttpStatus.OK);
+    @GetMapping(value = "/whiskys/distillery/{distilleryId}")
+    public ResponseEntity<List<Whisky>> readByAgeAndDistilleryId(@PathVariable Long distilleryId, @RequestParam(name="age") int age)
+    {
+        List<Whisky> whiskys = whiskyRepository.readByAgeAndDistilleryId(age, distilleryId);
+        return new ResponseEntity<>(whiskys, HttpStatus.OK);
     }
+//    http://localhost:8080/whiskies/whiskys/distillery/1/?age=12
+
+//            @RequestParam(name="age") Long distilleryId, int age){
+//        List<Whisky> whiskies = whiskyRepository.readByAgeAndDistilleryId(int age, Long distilleryId);
+//        return new ResponseEntity<>(whiskies, HttpStatus.OK);
+
+    @GetMapping(value = "/whiskys/year/{year}")
+    public List<Whisky> getWhiskyByYear(@PathVariable int year){
+        return whiskyRepository.findByYear(year);
+    }
+
 
 
 
